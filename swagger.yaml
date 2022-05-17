@@ -1,0 +1,855 @@
+openapi: 3.0.0
+info:
+  title: Consellor App API
+  description: An API created using node.js to handle operations helping people to connect with counsellors
+  version: 1.0.1
+  contact:
+    email: ausamindec@gmail.com
+#
+servers:
+  - url: "{protocol}://{host}/api/{version}"
+    description: Local host initial URL
+    variables:
+      version:
+        enum:
+          - v1
+        default: v1
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      host:
+        enum:
+          - localhost:8000
+          - counsellors.herokuapp.com
+        default: counsellors.herokuapp.com
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /signup:
+    post:
+      tags:
+        - User Related Operations
+      summary: User Can Signup using this path
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                dob:
+                  type: string
+                  format: date
+                qualification:
+                  type: string
+                aboutme:
+                  type: string
+                phno:
+                  type: string
+                role:
+                  type: string
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      dob:
+                        type: string
+                        format: date
+                      qualification:
+                        type: string
+                      aboutme:
+                        type: string
+                      phno:
+                        type: number
+                      role:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date
+                      updatedAt:
+                        type: string
+                        format: date
+                      __v:
+                        type: number
+
+  /login:
+    post:
+      tags:
+        - User Related Operations
+      summary: User Can Login using this path
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      dob:
+                        type: string
+                        format: date
+                      qualification:
+                        type: string
+                      aboutme:
+                        type: string
+                      phno:
+                        type: number
+                      role:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date
+                      updatedAt:
+                        type: string
+                        format: date
+                      __v:
+                        type: number
+
+  /logout:
+    get:
+      tags:
+        - User Related Operations
+      summary: Logout User
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /getuser:
+    get:
+      tags:
+        - User Related Operations
+      summary: Get User Details based on the cookie token. User first need to Login to get success response.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      dob:
+                        type: string
+                        format: date
+                      qualification:
+                        type: string
+                      aboutme:
+                        type: string
+                      phno:
+                        type: number
+                      role:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date
+                      updatedAt:
+                        type: string
+                        format: date
+                      __v:
+                        type: number
+        "422":
+          description: Please Login first.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /updateuser:
+    patch:
+      tags:
+        - User Related Operations
+      summary: Update User Details
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        # required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                dob:
+                  type: string
+                  format: date
+                qualification:
+                  type: string
+                aboutme:
+                  type: string
+                phno:
+                  type: string
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      dob:
+                        type: string
+                        format: date
+                      qualification:
+                        type: string
+                      aboutme:
+                        type: string
+                      phno:
+                        type: number
+                      role:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date
+                      updatedAt:
+                        type: string
+                        format: date
+                      __v:
+                        type: number
+
+  /uploadphoto:
+    patch:
+      tags:
+        - User Related Operations
+      summary: User Can Update the Profile Photo
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  photo:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      secure_url:
+                        type: string
+        "422":
+          description: Unprocessable.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /addoffer:
+    post:
+      tags:
+        - Offer / Session Related Operations
+      summary: Counsellor can Add Offer Time Should be in 24hrs format eg- 05:20
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                license:
+                  type: string
+                description:
+                  type: string
+                workingDays:
+                  type: string
+                fromTime:
+                  type: string
+                toTime:
+                  type: string
+                expertise:
+                  type: string
+                experience:
+                  type: string
+                price:
+                  type: string
+
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                title:
+                  type: string
+                license:
+                  type: string
+                description:
+                  type: string
+                workingDays:
+                  type: string
+                fromTime:
+                  type: string
+                toTime:
+                  type: string
+                expertise:
+                  type: string
+                experience:
+                  type: string
+                price:
+                  type: string
+        "422":
+          description: Some Error Occured
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: string
+                error:
+                  type: string
+
+  /getcounselloroffer:
+    get:
+      tags:
+        - Offer / Session Related Operations
+      summary: Get Offer Detail.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                title:
+                  type: string
+                license:
+                  type: string
+                description:
+                  type: string
+                workingDays:
+                  type: string
+                fromTime:
+                  type: string
+                toTime:
+                  type: string
+                expertise:
+                  type: string
+                experience:
+                  type: string
+                price:
+                  type: string
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /deleteoffer:
+    delete:
+      tags:
+        - Offer / Session Related Operations
+      summary: Delete The Offer.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: boolean
+                message:
+                  type: string
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /updateoffer:
+    patch:
+      tags:
+        - Offer / Session Related Operations
+      summary: Counsellor can Update the Offer
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        # required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                license:
+                  type: string
+                description:
+                  type: string
+                workingDays:
+                  type: string
+                fromTime:
+                  type: string
+                toTime:
+                  type: string
+                expertise:
+                  type: string
+                experience:
+                  type: string
+                price:
+                  type: string
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                title:
+                  type: string
+                license:
+                  type: string
+                description:
+                  type: string
+                workingDays:
+                  type: string
+                fromTime:
+                  type: string
+                toTime:
+                  type: string
+                expertise:
+                  type: string
+                experience:
+                  type: string
+                price:
+                  type: string
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /getoffers:
+    get:
+      tags:
+        - Offer / Session Related Operations
+      summary: Get All Offers.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: boolean
+                offers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      description:
+                        type: string
+
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /getofferdetail/{id}:
+    get:
+      tags:
+        - Offer / Session Related Operations
+      summary: Get One Offer.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of offer
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: boolean
+                offers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      description:
+                        type: string
+
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /myorders:
+    get:
+      tags:
+        - Order Related Operations
+      summary: Get List of All Orders.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: boolean
+                offers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      description:
+                        type: string
+
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /mybookings:
+    get:
+      tags:
+        - Order Related Operations
+      summary: Get List of All Bookings for Counsellor.
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                success:
+                  type: boolean
+                offers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      description:
+                        type: string
+
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /addreview:
+    post:
+      tags:
+        - Order Related Operations
+      summary: User Can Add Review. Required- rating, comment, orderId
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: string
+                comment:
+                  type: string
+                rating:
+                  type: number
+
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+
+  /updatecounsellingstatus:
+    patch:
+      tags:
+        - Order Related Operations
+      summary: Counsellor Can update counselling status. - Pending, Completed & Cancelled
+      consumes:
+        - application/json
+      producers:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                counsellingStatus:
+                  type: string
+                  enum:
+                    - Completed
+                    - Pending
+                    - Cancelled
+                orderId:
+                  type: string
+
+      responses:
+        "200":
+          description: All Good
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        "422":
+          description: Some Error Occured.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
