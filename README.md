@@ -9,7 +9,30 @@ Counsellor is a demo web app build using MERN stack where user can book sessions
 ### Deployed On ###
 Counsellor is deployed on heroku platform and live at - 
 
-## Live Deployment: [Counsellor](https://app-counsellor.herokuapp.com/home)
+## Live Deployment: 
+### [Counsellor](https://app-counsellor.herokuapp.com/home)
+
+## Link to Presentation
+### [Counsellor Presentation](https://docs.google.com/presentation/d/1y21UwBR0CpOnyFues3zWWbgBE9zFDTXG3K9Wxq_dlrs/edit?usp=sharing)
+
+## Walkthrough over the project:
+
+### Booking Walkthrough
+
+![Booking](./assets/booking_page.gif)
+
+### Login Page Walkthrough
+
+![Login](./assets/Login_page.gif)
+
+### User Profiling Walkthrough
+
+![UserProfile](./assets/user_profile.gif)
+
+### Home Page
+
+[HomePage](./assets/Home.png)
+
 
 ### Use Cases ###
 1. User and Counsellors can create profile.
@@ -60,5 +83,3 @@ Forgot password and change password are not implemented for app security reasons
 * swaggerui - Documenting Application
 
 
-## Link to Presentation
-[Counsellor Presentation](https://docs.google.com/presentation/d/1y21UwBR0CpOnyFues3zWWbgBE9zFDTXG3K9Wxq_dlrs/edit?usp=sharing)
