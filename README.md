@@ -9,10 +9,10 @@ Counsellor is a demo web app build using MERN stack where user can book sessions
 ### Deployed On ###
 Counsellor is deployed on heroku platform and live at - 
 
-## Live Deployment: 
+## Link to see the deployed application: 
 ### [Counsellor](https://app-counsellor.herokuapp.com/home)
 
-## Link to Presentation
+## Link to the Presentation
 ### [Counsellor Presentation](https://docs.google.com/presentation/d/1y21UwBR0CpOnyFues3zWWbgBE9zFDTXG3K9Wxq_dlrs/edit?usp=sharing)
 
 
