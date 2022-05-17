@@ -17,7 +17,7 @@ Counsellor is deployed on heroku platform and live at -
 
 
 ### Home Page
-[HomePage](./assets/Home.png)
+![HomePage](./assets/Home.png)
 
 ## Walkthrough over the project:
 
