@@ -1,0 +1,21 @@
+const baseUrl = "/api/v1";
+export const apiUrls = {
+  login: () => `${baseUrl}/login`,
+  signup: () => `${baseUrl}/signup`,
+  logout: () => `${baseUrl}/logout`,
+  getUser: () => `${baseUrl}/getuser`,
+  testRoute: () => `${baseUrl}/testdata`,
+  uploadPhoto: () => `${baseUrl}/uploadphoto`,
+  updateUser: () => `${baseUrl}/updateuser`,
+  addOffer: () => `${baseUrl}/addoffer`,
+  getCounsellorOffer: () => `${baseUrl}/getcounselloroffer`,
+  deleteOffer: () => `${baseUrl}/deleteoffer`,
+  getUpdateOffer: () => `${baseUrl}/updateoffer`,
+  getOffers: () => `${baseUrl}/getoffers`,
+  offerDetail: (id) => `${baseUrl}/getofferdetail/${id}`,
+  confirmPayment: () => `${baseUrl}/confirmpayment`,
+  getMyOrders: () => `${baseUrl}/myorders`,
+  addReview: () => `${baseUrl}/addreview`,
+  getMyBookings: () => `${baseUrl}/mybookings`,
+  updateCounsellingStatus: () => `${baseUrl}/updatecounsellingstatus`,
+};
